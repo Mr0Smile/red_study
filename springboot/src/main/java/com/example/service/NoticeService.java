@@ -1,10 +1,7 @@
 package com.example.service;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.ObjectUtil;
-import com.example.entity.Account;
 import com.example.entity.Notice;
-import com.example.exception.CustomException;
 import com.example.mapper.NoticeMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

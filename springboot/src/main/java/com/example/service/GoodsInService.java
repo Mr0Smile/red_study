@@ -58,7 +58,6 @@ public class GoodsInService {
         GoodsIn originalGoodsIn = goodsInMapper.selectById(goodsIn.getId());
         Integer updateNum = goodsIn.getNum() - originalGoodsIn.getNum();
 
-        Integer num = goodsIn.getNum();
         Goods goods = goodsService.selectById(goodsIn.getGoods_id());
         goods.setStock(goods.getStock() + updateNum);
 
@@ -66,7 +65,6 @@ public class GoodsInService {
         goodsInMapper.updateById(goodsIn);
 
     }
-
 
     /**
      * 根据ID查询

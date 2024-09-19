@@ -5,6 +5,7 @@ public class Result {
     private String msg;
     private Object data;
 
+    @SuppressWarnings("unused")
     private Result(Object data) {
         this.data = data;
     }
