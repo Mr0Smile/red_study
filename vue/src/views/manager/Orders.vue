@@ -28,7 +28,7 @@
 							style="border-radius: 5%; max-width: 50px"
 							:src="scope.row.goods_img"
 							:preview-src-list="[scope.row.goods_img]"
-							preview-teleported="true"
+							:preview-teleported="true"
 						></el-image>
 					</template>
 				</el-table-column>
