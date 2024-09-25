@@ -1,8 +1,8 @@
 package com.example.controller;
 
 import com.example.common.Result;
-import com.example.entity.StudyBaseform;
-import com.example.service.StudybaseformService;
+import com.example.entity.StudyBase;
+import com.example.service.StudyBaseService;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +14,16 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/studybaseform")
-public class StudybaseformController {
+public class StudyBaseController {
 
     @Resource
-    private StudybaseformService studybaseformService;
+    private StudyBaseService studybaseformService;
 
     /**
      * 新增
      */
     @PostMapping("/add")
-    public Result add(@RequestBody StudyBaseform studybaseform) {
+    public Result add(@RequestBody StudyBase studybaseform) {
         System.out.println("--------------------");
         System.out.println(studybaseform);
         System.out.println("--------------------");
@@ -45,7 +45,7 @@ public class StudybaseformController {
      * 修改
      */
     @PutMapping("/update")
-    public Result updateById(@RequestBody StudyBaseform studybaseform) {
+    public Result updateById(@RequestBody StudyBase studybaseform) {
         studybaseformService.updateById(studybaseform);
         return Result.success();
     }
@@ -55,7 +55,7 @@ public class StudybaseformController {
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
-        StudyBaseform studybaseform = studybaseformService.selectById(id);
+        StudyBase studybaseform = studybaseformService.selectById(id);
         return Result.success(studybaseform);
     }
 
@@ -63,8 +63,8 @@ public class StudybaseformController {
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(StudyBaseform studybaseform) {
-        List<StudyBaseform> list = studybaseformService.selectAll(studybaseform);
+    public Result selectAll(StudyBase studybaseform) {
+        List<StudyBase> list = studybaseformService.selectAll(studybaseform);
         return Result.success(list);
     }
 
@@ -72,12 +72,10 @@ public class StudybaseformController {
      * 分页查询
      */
     @GetMapping("/selectPage")
-    public Result selectPage(StudyBaseform studybaseform,
-                             @RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<StudyBaseform> page = studybaseformService.selectPage(studybaseform, pageNum, pageSize);
+    public Result selectPage(StudyBase studybaseform, @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<StudyBase> page = studybaseformService.selectPage(studybaseform, pageNum, pageSize);
         return Result.success(page);
     }
-
 
 }

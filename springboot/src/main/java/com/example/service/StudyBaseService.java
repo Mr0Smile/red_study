@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.entity.StudyBaseform;
-import com.example.mapper.StudybaseformMapper;
+import com.example.entity.StudyBase;
+import com.example.mapper.StudyBaseMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
@@ -13,15 +13,15 @@ import java.util.List;
  * studybaseform业务处理
  **/
 @Service
-public class StudybaseformService {
+public class StudyBaseService {
 
     @Resource
-    private StudybaseformMapper studybaseformMapper;
+    private StudyBaseMapper studybaseformMapper;
 
     /**
      * 新增
      */
-    public void add(StudyBaseform studybaseform) {
+    public void add(StudyBase studybaseform) {
         studybaseformMapper.insert(studybaseform);
     }
 
@@ -35,30 +35,30 @@ public class StudybaseformService {
     /**
      * 修改
      */
-    public void updateById(StudyBaseform studybaseform) {
+    public void updateById(StudyBase studybaseform) {
         studybaseformMapper.updateById(studybaseform);
     }
 
     /**
      * 根据ID查询
      */
-    public StudyBaseform selectById(Integer id) {
+    public StudyBase selectById(Integer id) {
         return studybaseformMapper.selectById(id);
     }
 
     /**
      * 查询所有
      */
-    public List<StudyBaseform> selectAll(StudyBaseform studybaseform) {
+    public List<StudyBase> selectAll(StudyBase studybaseform) {
         return studybaseformMapper.selectAll(studybaseform);
     }
 
     /**
      * 分页查询
      */
-    public PageInfo<StudyBaseform> selectPage(StudyBaseform studybaseform, Integer pageNum, Integer pageSize) {
+    public PageInfo<StudyBase> selectPage(StudyBase studybaseform, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<StudyBaseform> list = studybaseformMapper.selectAll(studybaseform);
+        List<StudyBase> list = studybaseformMapper.selectAll(studybaseform);
         return PageInfo.of(list);
     }
 

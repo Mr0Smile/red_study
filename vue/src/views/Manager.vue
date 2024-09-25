@@ -119,17 +119,6 @@
 						</div>
 					</div>
 
-					<el-menu-item
-						v-if="data.user.role === 'ADMIN'"
-						@click="gotoArticle"
-					>
-						<el-icon><Menu /></el-icon>
-						<span>文章测试</span>
-					</el-menu-item>
-
-
-
-
 					<el-menu-item index="login" @click="logout">
 						<el-icon><SwitchButton /></el-icon>
 						<span>退出系统</span>
@@ -175,10 +164,6 @@ const logout = () => {
 	ElMessage.success("退出成功");
 	localStorage.removeItem("system-user");
 	router.push("/login");
-};
-
-const gotoArticle = () => {
-	router.push({ name: "article", query: { articleId: 101 } });
 };
 </script>
 

@@ -18,6 +18,30 @@ const routes = [
 				},
 				component: () => import("@/views/manager/Home.vue"),
 			},
+			// 研学基地
+			{
+				path: "studyBase",
+				name: "studyBase",
+				component: () => import("@/views/manager/StudyBase.vue"),
+				params: {
+					showText: "研学基地",
+					role: "USER",
+					icon: "Lock",
+					show: true,
+				},
+			},
+			// 研学基地管理
+			{
+				path: "studyBaseManager",
+				name: "studyBaseManager",
+				component: () => import("@/views/manager/StudyBaseManager.vue"),
+				params: {
+					showText: "研学基地管理",
+					role: "ADMIN",
+					icon: "Lock",
+					show: true,
+				},
+			},
 			// 购物页
 			{
 				path: "buy",
@@ -83,7 +107,6 @@ const routes = [
 						},
 						component: () => import("@/views/manager/Goods.vue"),
 					},
-
 					// 商品进货管理
 					{
 						path: "goodsIn",
@@ -153,12 +176,6 @@ const routes = [
 				name: "article",
 				component: () => import("@/views/manager/Article.vue"),
 				params: { show: false }, // 导航栏不显示
-			},
-			{
-				path: "studybaseform",
-				name: "studybaseform",
-				component: () => import("@/views/manager/Studybaseform.vue"),
-				params: { showText: "研学基地", icon: "Lock", show: true },
 			},
 		],
 	},

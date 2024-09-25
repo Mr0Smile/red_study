@@ -1,13 +1,13 @@
 package com.example.entity;
 
-public class StudyBaseform {
+public class StudyBase {
 
     private Integer id;
 
     /**
      * 研学基地名字
      */
-    private String studyBaseformName;
+    private String studyBaseName;
 
     /**
      * 研学基地介绍
@@ -32,12 +32,12 @@ public class StudyBaseform {
         this.id = id;
     }
 
-    public String getStudyBaseformName() {
-        return studyBaseformName;
+    public String getStudyBaseName() {
+        return studyBaseName;
     }
 
-    public void setStudyBaseformName(String studyBaseformName) {
-        this.studyBaseformName = studyBaseformName;
+    public void setStudyBaseName(String studyBaseName) {
+        this.studyBaseName = studyBaseName;
     }
 
     public String getDescr() {
@@ -66,12 +66,7 @@ public class StudyBaseform {
 
     @Override
     public String toString() {
-        return "StudyBaseform{" +
-                "id=" + id +
-                ", studyBaseformName='" + studyBaseformName + '\'' +
-                ", descr='" + descr + '\'' +
-                ", articleId=" + articleId +
-                ", specialColumnId=" + specialColumnId +
-                '}';
+        return "StudyBase{" + "id=" + id + ", studyBaseName='" + studyBaseName + '\'' + ", descr='" + descr + '\''
+                + ", articleId=" + articleId + ", specialColumnId=" + specialColumnId + '}';
     }
 }
