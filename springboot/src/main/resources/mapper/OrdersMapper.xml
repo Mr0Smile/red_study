@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mapper.OrdersMapper">
+<mapper namespace="zjnu.red_study.mapper.OrdersMapper">
 
-    <resultMap id="OrdersResultMap" type="com.example.entity.Orders">
+    <resultMap id="OrdersResultMap" type="zjnu.red_study.entity.Orders">
         <id property="id" column="id"/>
         <result property="order_no" column="order_no"/>
         <result property="goods_id" column="goods_id"/>
@@ -17,7 +17,7 @@
         <result property="user_name" column="user_name"/>
     </resultMap>
 
-    <select id="selectAll" resultType="com.example.entity.Orders" resultMap="OrdersResultMap">
+    <select id="selectAll" resultType="zjnu.red_study.entity.Orders" resultMap="OrdersResultMap">
         select orders.*, goods.name as goods_name, goods.img as goods_img, user.name as user_name
         from orders
         left join goods on orders.goods_id = goods.id
@@ -30,12 +30,12 @@
     </select>
 
 
-    <insert id="insert" parameterType="com.example.entity.Orders" useGeneratedKeys="true">
+    <insert id="insert" parameterType="zjnu.red_study.entity.Orders" useGeneratedKeys="true">
         insert into orders(id, order_no, goods_id, num, user_id, status, time)
         values (#{id}, #{order_no}, #{goods_id}, #{num}, #{user_id}, #{status}, #{time})
     </insert>
 
-    <update id="updateById" parameterType="com.example.entity.Orders">
+    <update id="updateById" parameterType="zjnu.red_study.entity.Orders">
         update orders set order_no = #{order_no}, goods_id = #{goods_id}, num = #{num}, user_id = #{user_id}, status = #{status}, time = #{time}
         where id = #{id}
     </update>

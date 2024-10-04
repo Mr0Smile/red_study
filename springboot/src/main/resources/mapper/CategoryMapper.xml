@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mapper.CategoryMapper">
+<mapper namespace="zjnu.red_study.mapper.CategoryMapper">
 
-    <select id="selectAll" resultType="com.example.entity.Category">
+    <select id="selectAll" resultType="zjnu.red_study.entity.Category">
         select * from category
         <where>
             <if test="category != null"> and category like concat('%', #{category}, '%')</if>
@@ -12,12 +12,12 @@
         order by id desc
     </select>
 
-    <insert id="insert" parameterType="com.example.entity.Category" useGeneratedKeys="true">
+    <insert id="insert" parameterType="zjnu.red_study.entity.Category" useGeneratedKeys="true">
         insert into category(id, category)
         values (#{id}, #{category})
     </insert>
 
-    <update id="updateById" parameterType="com.example.entity.Category">
+    <update id="updateById" parameterType="zjnu.red_study.entity.Category">
         update category set category = #{category}
         where id = #{id}
     </update>
