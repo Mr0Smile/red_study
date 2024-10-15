@@ -1,7 +1,12 @@
 <template>
   <div class="login-container">
     <div class="login-box">
-      <div style="font-weight: bold; font-size: 24px; text-align: center; margin-bottom: 30px; color: #1450aa">欢 迎 注 册</div>
+      <div style="					
+          font-weight: bold;
+					font-size: 28px;
+					text-align: center;
+					margin-bottom: 30px;"
+        >欢 迎 注 册</div>
       <el-form :model="data.form"  ref="formRef" :rules="data.rules">
         <el-form-item prop="username">
           <el-input :prefix-icon="User" size="large" v-model="data.form.username" placeholder="请输入账号" />
@@ -89,9 +94,10 @@
   align-items: center;
   background: linear-gradient(to bottom, #a8c0ff, #3f2b96);
   background-size: cover;
+  background-image: url('../assets/imgs/login_background_3.png');
 }
 .login-box {
-  width: 350px;
+  width: 400px;
   padding: 50px 30px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0,.1);

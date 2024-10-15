@@ -3,15 +3,19 @@
 		<div class="login-box">
 			<div
 				style="
+				
 					font-weight: bold;
-					font-size: 24px;
+					font-size: 28px;
 					text-align: center;
 					margin-bottom: 30px;
-					color: #1450aa;
+					/* color: #1450aa; */
+					/* color:#eae0c7; */
+					/* color: white; */
 				"
 			>
 				欢 迎 登 录
 			</div>
+
 			<el-form :model="data.form" ref="formRef" :rules="data.rules">
 				<el-form-item prop="username">
 					<el-input
@@ -40,6 +44,7 @@
 					>
 				</el-form-item>
 			</el-form>
+
 			<div style="text-align: right">
 				还没有账号？请 <a href="/register">注册</a>
 			</div>
@@ -100,12 +105,18 @@ const login = () => {
 	align-items: center;
 	background: linear-gradient(to top, #7f7fd5, #86a8e7, #91eae4);
 	background-size: cover;
+	background-image: url('../assets/imgs/login_background_3.png');
 }
 .login-box {
-	width: 350px;
+	width: 400px;
+	height: 360px;
 	padding: 50px 30px;
 	border-radius: 5px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	/* background-color: rgba(234,224,199,0.5); */
+
 	background-color: rgba(255, 255, 255, 0.5);
+
+	/* background-image: url('../assets/imgs/login_background_1.png'); */
 }
 </style>
