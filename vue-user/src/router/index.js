@@ -25,19 +25,6 @@ const routes = [
 				component: () => import("@/views/manager/StudyBase.vue"),
 				params: {
 					showText: "研学基地",
-					role: "USER",
-					icon: "Lock",
-					show: true,
-				},
-			},
-			// 研学基地管理
-			{
-				path: "studyBaseManager",
-				name: "studyBaseManager",
-				component: () => import("@/views/manager/StudyBaseManager.vue"),
-				params: {
-					showText: "研学基地管理",
-					role: "ADMIN",
 					icon: "Lock",
 					show: true,
 				},
@@ -60,101 +47,6 @@ const routes = [
 				name: "orders",
 				params: { showText: "订单管理", icon: "Tickets", show: true },
 				component: () => import("@/views/manager/Orders.vue"),
-			},
-			// 特色活动管理
-			{
-				path: "notice",
-				name: "notice",
-				params: {
-					showText: "特色活动管理",
-					role: "ADMIN",
-					icon: "Bell",
-					show: true,
-				},
-				component: () => import("@/views/manager/Notice.vue"),
-			},
-			// 文创商品管理
-			{
-				path: "",
-				name: "",
-				params: {
-					showText: "文创商品管理",
-					role: "ADMIN",
-					icon: "Menu",
-					index: "1",
-					show: true,
-				},
-				children: [
-					// 商品分类管理
-					{
-						path: "category",
-						name: "category",
-						params: {
-							showText: "商品分类管理",
-							icon: "Menu",
-							show: true,
-						},
-						component: () => import("@/views/manager/Category.vue"),
-					},
-					// 商品信息管理
-					{
-						path: "goods",
-						name: "goods",
-						params: {
-							showText: "商品信息管理",
-							icon: "Goods",
-							show: true,
-						},
-						component: () => import("@/views/manager/Goods.vue"),
-					},
-					// 商品进货管理
-					{
-						path: "goodsIn",
-						name: "goodsIn",
-						params: {
-							showText: "商品进货管理",
-							icon: "SoldOut",
-							show: true,
-						},
-						component: () => import("@/views/manager/GoodsIn.vue"),
-					},
-				],
-			},
-			// 用户管理
-			{
-				path: "",
-				name: "",
-				params: {
-					showText: "用户管理",
-					role: "ADMIN",
-					icon: "Memo",
-					index: "2",
-					show: true,
-				},
-				children: [
-					// 管理员管理
-					{
-						path: "admin",
-						name: "admin",
-						params: {
-							showText: "管理员管理",
-							icon: "User",
-							show: true,
-						},
-						component: () => import("@/views/manager/Admin.vue"),
-					},
-					// 普通用户管理
-					{
-						path: "user",
-						name: "user",
-						params: {
-							showText: "普通用户管理",
-							icon: "User",
-							show: true,
-						},
-						component: () => import("@/views/manager/User.vue"),
-					},
-				],
 			},
 			// 个人资料
 			{

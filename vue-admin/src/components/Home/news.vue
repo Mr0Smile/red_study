@@ -44,8 +44,4 @@ const activeName = ref(1);
 .news-card {
 	height: 40vh;
 }
-
-.heading{
-	text-align: center;
-}
 </style>

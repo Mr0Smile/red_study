@@ -6,8 +6,7 @@
     margin: 3% 0 5% 0;
     /* 上下边距 */
     font-size: x-large;
-    color: #a07359;
-    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
 }
 
 .title {

@@ -3,14 +3,11 @@
 		<div class="login-box">
 			<div
 				style="
-				
 					font-weight: bold;
 					font-size: 28px;
 					text-align: center;
 					margin-bottom: 30px;
-					/* color: #1450aa; */
-					/* color:#eae0c7; */
-					/* color: white; */
+					color: #815c47;
 				"
 			>
 				欢 迎 登 录
@@ -105,7 +102,7 @@ const login = () => {
 	align-items: center;
 	background: linear-gradient(to top, #7f7fd5, #86a8e7, #91eae4);
 	background-size: cover;
-	background-image: url('../assets/imgs/login_background_3.png');
+	background-image: url("../assets/imgs/login_background_3.png");
 }
 .login-box {
 	width: 400px;

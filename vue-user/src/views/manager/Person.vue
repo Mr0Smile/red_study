@@ -81,6 +81,10 @@ const handleFileUpload = (file) => {
 const emit = defineEmits(["updateUser"]);
 // 把当前修改的用户信息存储到后台数据库
 const save = () => {
+	if (!(data.user.role === "null")) {
+		ElMessage.info("请先登录");
+		return;
+	}
 	if (data.user.role === "ADMIN") {
 		request.put("/admin/update", data.user).then((res) => {
 			if (res.code === "200") {

@@ -148,6 +148,9 @@ const data = reactive({
 	order_no: null,
 });
 
+console.log(data.user);
+console.log(data.user.role === "USER");
+
 // 分页查询
 const load = () => {
 	if (data.user.role === "USER") {
@@ -164,7 +167,7 @@ const load = () => {
 				data.tableData = res.data?.list;
 				data.total = res.data?.total;
 			});
-	} else {
+	} else if (data.user.role === "ADMIN") {
 		request
 			.get("/orders/selectPage", {
 				params: {
@@ -177,6 +180,8 @@ const load = () => {
 				data.tableData = res.data?.list;
 				data.total = res.data?.total;
 			});
+	} else {
+		ElMessage.info("请先登录");
 	}
 };
 
