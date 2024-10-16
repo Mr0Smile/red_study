@@ -31,6 +31,8 @@ defineProps({
 		default: () => [
 			{ id: 1, title: "新闻1", content: "内容1" },
 			{ id: 2, title: "新闻2", content: "内容2" },
+			{ id: 3, title: "新闻3", content: "内容3" },
+			{ id: 4, title: "新闻4", content: "内容4" },
 		],
 	},
 });

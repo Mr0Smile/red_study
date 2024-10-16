@@ -17,10 +17,15 @@
 <script setup>
 import { defineProps } from "vue";
 
+import img1 from "../../assets/imgs/1.jpg";
+import img2 from "../../assets/imgs/2.jpg";
+import img3 from "../../assets/imgs/3.jpg";
+import img4 from "../../assets/imgs/4.jpg";
+
 const props = defineProps({
 	images: {
 		type: Array,
-		default: () => [],
+		default: () => [img1, img2, img3, img4],
 	},
 });
 </script>

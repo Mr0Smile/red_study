@@ -1,13 +1,15 @@
 <template>
-	<carousel :images="images"></carousel>
+	<div>
+		<carousel :images="images"></carousel>
 
-	<div style="clear: both">
-		<notice class="home-card" :notice="data.notice"></notice>
-		<news class="home-card"></news>
-	</div>
+		<div style="clear: both">
+			<notice class="home-card" :notice="data.notice"></notice>
+			<news class="home-card"></news>
+		</div>
 
-	<div style="clear: both">
-		<activity></activity>
+		<div style="clear: both">
+			<activity></activity>
+		</div>
 	</div>
 </template>
 
@@ -19,13 +21,6 @@ import carousel from "@/components/Home/carousel.vue";
 import notice from "@/components/Home/notice.vue";
 import news from "@/components/Home/news.vue";
 import activity from "@/components/Home/activity.vue";
-
-import img1 from "../../assets/imgs/1.jpg";
-import img2 from "../../assets/imgs/2.jpg";
-import img3 from "../../assets/imgs/3.jpg";
-import img4 from "../../assets/imgs/4.jpg";
-
-const images = [img1, img2, img3, img4];
 
 const data = reactive({
 	admin: JSON.parse(localStorage.getItem("system-admin") || "{}"),
