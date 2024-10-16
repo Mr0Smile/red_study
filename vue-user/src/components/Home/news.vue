@@ -42,8 +42,6 @@ const activeName = ref(1);
 
 <style scoped>
 .news-card {
-	width: 40%;
 	height: 40vh;
-	margin: 0 0% 0 10%;
 }
 </style>

@@ -3,12 +3,17 @@
 		<carousel :images="images"></carousel>
 
 		<div style="clear: both">
-			<notice class="home-card" :notice="data.notice"></notice>
-			<news class="home-card"></news>
+			<activity class="home-card" style="width: 60%"></activity>
+			<news
+				class="home-card"
+				style="width: 30%; margin: 0 0% 0 5%"
+			></news>
 		</div>
 
 		<div style="clear: both">
-			<activity></activity>
+			<div class="home-card" style="margin-left: 3%">
+				<notice :notice="data.notice"></notice>
+			</div>
 		</div>
 	</div>
 </template>

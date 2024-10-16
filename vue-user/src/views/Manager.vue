@@ -28,6 +28,7 @@ const updateUser = () => {
 .container {
 	width: 100%;
 	background-image: url("../assets/imgs/background.png");
+	background-repeat: repeat-y;
 }
 
 .view-container {
