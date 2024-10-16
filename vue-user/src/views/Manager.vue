@@ -26,6 +26,7 @@ const updateUser = () => {
 
 <style scoped>
 .container {
+	min-height: 100vh;
 	width: 100%;
 	background-image: url("../assets/imgs/background.png");
 	background-repeat: repeat-y;

@@ -167,12 +167,12 @@ INSERT INTO `orders` VALUES (14, '79193c2c42f94dfe8db607717ca852e4', 12, 3, 2, '
 INSERT INTO `orders` VALUES (15, 'bb4b797eb32442eb84cd712f6c6d03ee', 12, 1, 2, '待发货', '2024-09-19 14:33:50');
 
 -- ----------------------------
--- Table structure for study_basefrom
+-- Table structure for study_base
 -- ----------------------------
-DROP TABLE IF EXISTS `study_basefrom`;
-CREATE TABLE `study_basefrom`  (
+DROP TABLE IF EXISTS `study_base`;
+CREATE TABLE `study_base`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '研学基地ID',
-  `study_baseform_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '研学基地名字',
+  `study_base_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '研学基地名字',
   `descr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '研学基地介绍',
   `article_id` int NULL DEFAULT NULL COMMENT '文章ID',
   `special_column_id` int NULL DEFAULT NULL COMMENT '专栏ID',
@@ -180,10 +180,10 @@ CREATE TABLE `study_basefrom`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '研学基地表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of study_basefrom
+-- Records of study_base
 -- ----------------------------
-INSERT INTO `study_basefrom` VALUES (1, '1号研学基地', NULL, 1, NULL);
-INSERT INTO `study_basefrom` VALUES (2, '2号研学基地', NULL, 2, NULL);
+INSERT INTO `study_base` VALUES (1, '1号研学基地', NULL, 1, NULL);
+INSERT INTO `study_base` VALUES (2, '2号研学基地', NULL, 2, NULL);
 
 -- ----------------------------
 -- Table structure for user

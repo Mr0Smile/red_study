@@ -30,6 +30,30 @@ const routes = [
 				},
 				component: () => import("@/views/manager/Buy.vue"),
 			},
+			// 研学基地
+			{
+				path: "studyBase",
+				name: "studyBase",
+				component: () => import("@/views/manager/StudyBase.vue"),
+				params: {
+					showText: "研学基地",
+					role: "USER",
+					icon: "Lock",
+					show: true,
+				},
+			},
+			// 研学基地管理
+			{
+				path: "studyBaseManager",
+				name: "studyBaseManager",
+				component: () => import("@/views/manager/StudyBaseManager.vue"),
+				params: {
+					showText: "研学基地管理",
+					role: "ADMIN",
+					icon: "Lock",
+					show: true,
+				},
+			},
 			// 订单管理
 			{
 				path: "orders",
