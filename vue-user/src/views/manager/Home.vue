@@ -1,19 +1,19 @@
 <template>
-	<div>
+	<div class="clearfix">
 		<carousel :images="images"></carousel>
 
-		<div style="clear: both">
-			<activity class="home-card" style="width: 60%"></activity>
-			<news
-				class="home-card"
-				style="width: 30%; margin: 0 0% 0 5%"
-			></news>
+		<div class="clearfix" style="clear: both">
+			<div class="home-card" style="width: 60%">
+				<activity></activity><activity></activity>
+			</div>
+
+			<news class="home-card" style="width: 35%; margin: 0 0 0 3%"></news>
 		</div>
 
-		<div style="clear: both">
-			<div class="home-card" style="margin-left: 3%">
-				<notice :notice="data.notice"></notice>
-			</div>
+		<div class="clearfix" style="clear: both">
+			<a1 class="home-card" style="width: 55%"></a1>
+
+			<a2 class="home-card" style="width: 42%; margin: 0 0 0 3%"></a2>
 		</div>
 	</div>
 </template>
@@ -23,9 +23,10 @@ import { reactive, onMounted } from "vue";
 import request from "@/utils/request";
 
 import carousel from "@/components/Home/carousel.vue";
-import notice from "@/components/Home/notice.vue";
-import news from "@/components/Home/news.vue";
 import activity from "@/components/Home/activity.vue";
+import news from "@/components/Home/news.vue";
+import a1 from "@/components/Home/a1.vue";
+import a2 from "@/components/Home/a2.vue";
 
 const data = reactive({
 	admin: JSON.parse(localStorage.getItem("system-admin") || "{}"),
@@ -49,4 +50,10 @@ defineEmits(["updateUser"]);
 
 <style>
 @import "../../assets/css/home.css";
+
+.clearfix::after {
+	content: "";
+	display: table;
+	clear: both;
+}
 </style>

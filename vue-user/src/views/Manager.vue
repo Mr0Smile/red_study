@@ -26,14 +26,15 @@ const updateUser = () => {
 
 <style scoped>
 .container {
-	min-height: 100vh;
+	min-height: 120vh;
 	width: 100%;
 	background-image: url("../assets/imgs/background.png");
 	background-repeat: repeat-y;
+	overflow: hidden;
 }
 
 .view-container {
-	padding: 5vh 10vh;
+	padding: 5vh 5vh;
 }
 
 .el-menu-item.is-active {

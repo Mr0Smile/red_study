@@ -43,7 +43,7 @@ defineProps({
 	text-align: center;
 	line-height: 200px;
 	flex: 1;
-	padding: 1.5%;
+	padding: 0.3%;
 	position: relative;
 	margin: auto;
 	cursor: pointer;
@@ -57,9 +57,9 @@ defineProps({
 
 .content-item-text-container {
 	position: absolute;
-	width: 91%;
+	width: 98%;
 	height: 0; /* 初始高度为0 */
-	top: 75%;
+	top: 80%;
 	transition: height 0.3s; /* 添加过渡效果 */
 }
 
@@ -72,10 +72,6 @@ defineProps({
 	transition: opacity 0.4s; /* 添加过渡效果 */
 	font-weight: bold;
 	color: whitesmoke;
-}
-
-.content-item:hover .content-item-text-container {
-	height: 30px; /* 悬浮时改变高度 */
 }
 
 .content-item:hover .content-item-text-container div {
