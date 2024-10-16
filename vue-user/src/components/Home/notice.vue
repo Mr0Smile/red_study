@@ -10,7 +10,7 @@
 				placement="top"
 			>
 				<el-card>
-					<h3>{{ item.title }}</h3>
+					<div class="title">{{ item.title }}</div>
 					<p>{{ item.content }}</p>
 				</el-card>
 			</el-timeline-item>
@@ -32,11 +32,9 @@ const props = defineProps({
 <style scoped>
 .heading {
 	margin: 3% 0; /* 上下边距 */
-	font-size: x-large;
-	font-weight: bolder;
 }
 
 .timeline {
-	width: 50%; /* Timeline 宽度 */
+	width: 100%; /* Timeline 宽度 */
 }
 </style>

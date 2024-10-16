@@ -1,7 +1,14 @@
 <template>
 	<carousel :images="images"></carousel>
 
-	<notice :notice="data.notice"></notice>
+	<div style="clear: both">
+		<notice class="home-card" :notice="data.notice"></notice>
+		<news class="home-card"></news>
+	</div>
+
+	<div style="clear: both">
+		<activity></activity>
+	</div>
 </template>
 
 <script setup>
@@ -10,6 +17,8 @@ import request from "@/utils/request";
 
 import carousel from "@/components/Home/carousel.vue";
 import notice from "@/components/Home/notice.vue";
+import news from "@/components/Home/news.vue";
+import activity from "@/components/Home/activity.vue";
 
 import img1 from "../../assets/imgs/1.jpg";
 import img2 from "../../assets/imgs/2.jpg";
@@ -37,3 +46,7 @@ onMounted(() => {
 
 defineEmits(["updateUser"]);
 </script>
+
+<style>
+@import "../../assets/css/home.css";
+</style>
