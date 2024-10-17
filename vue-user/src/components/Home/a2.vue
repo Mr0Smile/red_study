@@ -126,11 +126,6 @@ defineProps({
 				title: "新闻7",
 				img: img3,
 			},
-			{
-				id: 8,
-				title: "新闻8",
-				img: img4,
-			},
 		],
 	},
 });
