@@ -12,7 +12,7 @@
 			>
 		</div>
 
-		<div class="card" style="margin-bottom: 5px">
+		<div class="card" style="margin-bottom: 5px; min-height: 70vh">
 			<div style="margin-bottom: 10px">
 				<el-button type="primary" @click="handleAdd">新增</el-button>
 			</div>

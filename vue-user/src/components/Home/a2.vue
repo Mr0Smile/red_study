@@ -6,7 +6,7 @@
 			<div class="img-container" v-if="index < 2">
 				<img :src="item.img" />
 				<div class="text-container">
-					<div>活动标题</div>
+					<div>{{ item.title }}</div>
 				</div>
 			</div>
 

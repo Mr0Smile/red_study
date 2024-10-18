@@ -32,12 +32,12 @@
 									margin-left: 3px;
 								"
 							>
-								红色研学系统
+								红色研学
 							</div>
 						</div>
 					</div>
 
-					<div style="border-right: 1px solid #ddd; flex: 5">
+					<div style="flex: 5">
 						<el-menu
 							router
 							style="border: none"
@@ -155,6 +155,45 @@
 	</el-container>
 </template>
 
+<style scoped>
+.el-header {
+	transition: top 0.3s;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	padding: 0;
+	z-index: 1000;
+}
+
+.navbar-hidden {
+	top: -60px; /* Adjust this value to match the height of your navbar */
+}
+
+.navbar-container {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.el-menu {
+	display: flex;
+}
+
+.el-menu-item a {
+	text-decoration: none;
+	margin-left: 20px; /* Adjust the spacing between menu items */
+}
+
+.el-main {
+	padding-top: 60px; /* To make sure content is not hidden behind the navbar */
+}
+
+:deep(th) {
+	color: #333;
+}
+</style>
+
 <script setup>
 import { ref, onMounted, onBeforeUnmount, reactive } from "vue";
 import router from "@/router";
@@ -202,48 +241,3 @@ const logout = () => {
 	localStorage.removeItem("system-user");
 };
 </script>
-
-<style scoped>
-.el-header {
-	transition: top 0.3s;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	padding: 0;
-	z-index: 1000;
-}
-
-.navbar-hidden {
-	top: -60px; /* Adjust this value to match the height of your navbar */
-}
-
-.navbar-container {
-	display: flex;
-	width: 100%;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.el-menu {
-	display: flex;
-}
-
-.el-menu-item a {
-	text-decoration: none;
-	margin-left: 20px; /* Adjust the spacing between menu items */
-}
-
-.el-main {
-	padding-top: 60px; /* To make sure content is not hidden behind the navbar */
-}
-
-.el-menu-item.is-active {
-	background-color: #e0edfd;
-}
-.el-menu-item:hover {
-	color: #1967e3;
-}
-:deep(th) {
-	color: #333;
-}
-</style>

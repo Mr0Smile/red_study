@@ -12,7 +12,7 @@
 			>
 		</div>
 
-		<div class="card" style="margin-bottom: 5px">
+		<div class="card" style="margin-bottom: 5px; min-height: 70vh">
 			<el-table :data="data.tableData" stripe>
 				<el-table-column
 					label="名称"

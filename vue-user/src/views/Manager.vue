@@ -24,7 +24,7 @@ const updateUser = () => {
 
 <style scoped>
 .main-container {
-	min-height: 150vh;
+	min-height: 100vh;
 	width: 100%;
 	background-image: url("../assets/imgs/background.png");
 	background-size: cover;
@@ -33,15 +33,13 @@ const updateUser = () => {
 }
 
 .view-container {
-	padding: 5vh 5vh;
+	padding: 0vh 5vh;
 }
 
 .el-menu-item.is-active {
 	background-color: #e0edfd !important;
 }
-.el-menu-item:hover {
-	color: #1967e3;
-}
+
 :deep(th) {
 	color: #333;
 }

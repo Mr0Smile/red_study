@@ -115,7 +115,7 @@ const register = () => {
 	align-items: center;
 	background: linear-gradient(to bottom, #a8c0ff, #3f2b96);
 	background-size: cover;
-	background-image: url("../assets/imgs/login_background_3.png");
+	background-image: url("../assets/imgs/login_background.png");
 }
 .login-box {
 	width: 400px;

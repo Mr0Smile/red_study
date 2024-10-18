@@ -49,6 +49,27 @@
 	</div>
 </template>
 
+<style scoped>
+.login-container {
+	height: 100vh;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(to top, #7f7fd5, #86a8e7, #91eae4);
+	background-size: cover;
+	background-image: url("../assets/imgs/login_background.png");
+}
+.login-box {
+	width: 400px;
+	height: 360px;
+	padding: 50px 30px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background-color: rgba(255, 255, 255, 0.5);
+}
+</style>
+
 <script setup>
 import { reactive, ref } from "vue";
 import { User, Lock } from "@element-plus/icons-vue";
@@ -92,28 +113,3 @@ const login = () => {
 		});
 };
 </script>
-
-<style scoped>
-.login-container {
-	height: 100vh;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: linear-gradient(to top, #7f7fd5, #86a8e7, #91eae4);
-	background-size: cover;
-	background-image: url("../assets/imgs/login_background_3.png");
-}
-.login-box {
-	width: 400px;
-	height: 360px;
-	padding: 50px 30px;
-	border-radius: 5px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	/* background-color: rgba(234,224,199,0.5); */
-
-	background-color: rgba(255, 255, 255, 0.5);
-
-	/* background-image: url('../assets/imgs/login_background_1.png'); */
-}
-</style>
