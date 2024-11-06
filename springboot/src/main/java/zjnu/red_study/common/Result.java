@@ -40,6 +40,14 @@ public class Result {
         return result;
     }
 
+    public static Result fail(String msg) {
+        Result result = new Result();
+        result.setCode("400"); // 或者使用多少个404等根据基础设定
+        result.setMsg(msg);
+        return result;
+    }
+
+
     public String getCode() {
         return code;
     }

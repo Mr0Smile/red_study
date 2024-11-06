@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : MySql
+ Source Server         : wang
  Source Server Type    : MySQL
- Source Server Version : 80035 (8.0.35)
+ Source Server Version : 80013
  Source Host           : localhost:3306
  Source Schema         : red_study
 
  Target Server Type    : MySQL
- Target Server Version : 80035 (8.0.35)
+ Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 08/10/2024 07:16:51
+ Date: 06/11/2024 16:57:44
 */
 
 SET NAMES utf8mb4;
@@ -22,15 +22,15 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '管理员ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '管理员ID',
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '管理员账号',
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '管理员密码',
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '管理员名称',
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '管理员头像',
   `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '角色',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `username`(`username` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '管理员信息' ROW_FORMAT = DYNAMIC;
+  UNIQUE INDEX `username`(`username`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '管理员信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
@@ -38,14 +38,32 @@ CREATE TABLE `admin`  (
 INSERT INTO `admin` VALUES (1, 'admin', 'admin', '管理员', 'http://localhost:9090/files/download/avatar.png', 'ADMIN');
 
 -- ----------------------------
+-- Table structure for articles
+-- ----------------------------
+DROP TABLE IF EXISTS `articles`;
+CREATE TABLE `articles`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `article_id` int(22) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of articles
+-- ----------------------------
+INSERT INTO `articles` VALUES (1, '1', '1', 1);
+INSERT INTO `articles` VALUES (2, '1', '# 胡志迪大雾', 2);
+
+-- ----------------------------
 -- Table structure for category
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '分类ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '分类ID',
   `category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分类名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '书籍分类' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '书籍分类' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
@@ -58,15 +76,15 @@ INSERT INTO `category` VALUES (3, 'C');
 -- ----------------------------
 DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '内容ID',
-  `article_id` int NULL DEFAULT NULL COMMENT '文章ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '内容ID',
+  `article_id` int(11) NULL DEFAULT NULL COMMENT '文章ID',
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '内容',
-  `content_type` int NULL DEFAULT NULL COMMENT '内容类型',
-  `order` int NULL DEFAULT NULL COMMENT '内容顺序',
-  `show_type` int NULL DEFAULT NULL COMMENT '展示方式',
-  `special_column_id` int NULL DEFAULT NULL COMMENT '专栏ID',
+  `content_type` int(11) NULL DEFAULT NULL COMMENT '内容类型',
+  `order` int(11) NULL DEFAULT NULL COMMENT '内容顺序',
+  `show_type` int(11) NULL DEFAULT NULL COMMENT '展示方式',
+  `special_column_id` int(11) NULL DEFAULT NULL COMMENT '专栏ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '内容库' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '内容库' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of content
@@ -81,7 +99,7 @@ INSERT INTO `content` VALUES (4, 2, '1', 0, 0, 0, NULL);
 -- ----------------------------
 DROP TABLE IF EXISTS `goods`;
 CREATE TABLE `goods`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '商品ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品ID',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品名称',
   `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品图片',
   `descr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品简介',
@@ -90,11 +108,11 @@ CREATE TABLE `goods`  (
   `discount` double NULL DEFAULT 1 COMMENT '折扣',
   `unit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '商品单位',
   `stock` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '库存',
-  `category_id` int NULL DEFAULT NULL COMMENT '分类',
+  `category_id` int(11) NULL DEFAULT NULL COMMENT '分类',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `category_id`(`category_id` ASC) USING BTREE,
+  INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of goods
@@ -107,14 +125,14 @@ INSERT INTO `goods` VALUES (14, 'java web', NULL, NULL, NULL, 38.20, 1, '本', '
 -- ----------------------------
 DROP TABLE IF EXISTS `goods_in`;
 CREATE TABLE `goods_in`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '进货ID',
-  `goods_id` int NULL DEFAULT NULL COMMENT '商品ID',
-  `num` int NULL DEFAULT NULL COMMENT '进货数量',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '进货ID',
+  `goods_id` int(11) NULL DEFAULT NULL COMMENT '商品ID',
+  `num` int(11) NULL DEFAULT NULL COMMENT '进货数量',
   `channel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '进货渠道',
   `date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '进货日期',
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品进货表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品进货表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of goods_in
@@ -127,12 +145,12 @@ INSERT INTO `goods_in` VALUES (3, 14, 11, '出版社', '2024-09-04 09:17:15', NU
 -- ----------------------------
 DROP TABLE IF EXISTS `notice`;
 CREATE TABLE `notice`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '公告ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '公告ID',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '公告标题',
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '公告内容',
   `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发布时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统公告' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统公告' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of notice
@@ -145,15 +163,15 @@ INSERT INTO `notice` VALUES (4, '系统维护公告', '系统将于2024-09-01 09
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '订单ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '订单ID',
   `order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单编号',
-  `goods_id` int NULL DEFAULT NULL COMMENT '商品ID',
-  `num` int NULL DEFAULT NULL COMMENT '购买数量',
-  `user_id` int NULL DEFAULT NULL COMMENT '下单人',
+  `goods_id` int(11) NULL DEFAULT NULL COMMENT '商品ID',
+  `num` int(11) NULL DEFAULT NULL COMMENT '购买数量',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '下单人',
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单状态',
   `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单信息' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
@@ -171,13 +189,13 @@ INSERT INTO `orders` VALUES (15, 'bb4b797eb32442eb84cd712f6c6d03ee', 12, 1, 2, '
 -- ----------------------------
 DROP TABLE IF EXISTS `study_base`;
 CREATE TABLE `study_base`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '研学基地ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '研学基地ID',
   `study_base_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '研学基地名字',
   `descr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '研学基地介绍',
-  `article_id` int NULL DEFAULT NULL COMMENT '文章ID',
-  `special_column_id` int NULL DEFAULT NULL COMMENT '专栏ID',
+  `article_id` int(11) NULL DEFAULT NULL COMMENT '文章ID',
+  `special_column_id` int(11) NULL DEFAULT NULL COMMENT '专栏ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '研学基地表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '研学基地表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of study_base
@@ -186,11 +204,28 @@ INSERT INTO `study_base` VALUES (1, '1号研学基地', NULL, 1, NULL);
 INSERT INTO `study_base` VALUES (2, '2号研学基地', NULL, 2, NULL);
 
 -- ----------------------------
+-- Table structure for study_basefrom
+-- ----------------------------
+DROP TABLE IF EXISTS `study_basefrom`;
+CREATE TABLE `study_basefrom`  (
+  `id` int(11) NOT NULL COMMENT '研学基地ID',
+  `study_baseform_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '研学基地名字',
+  `descr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '研学基地介绍',
+  `article_id` int(11) NULL DEFAULT NULL COMMENT '文章ID',
+  `special_column_id` int(11) NULL DEFAULT NULL COMMENT '专栏ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '研学基地表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of study_basefrom
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '用户账号',
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '用户密码',
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '用户名称',
@@ -201,8 +236,8 @@ CREATE TABLE `user`  (
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '邮箱',
   `create_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `username`(`username` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '普通用户信息' ROW_FORMAT = DYNAMIC;
+  UNIQUE INDEX `username`(`username`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '普通用户信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user

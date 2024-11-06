@@ -1,260 +1,161 @@
 <template>
-	<div>
-		<div class="card" style="margin-bottom: 5px">
-			<el-input
-				v-model="data.order_no"
-				style="width: 300px; margin-right: 10px"
-				placeholder="请输入订单编号查询"
-			></el-input>
-			<el-button type="primary" @click="load">查询</el-button>
-			<el-button type="info" style="margin: 0 10px" @click="reset"
-				>重置</el-button
-			>
-		</div>
+  <div class="markdown-editor">
+    <h2 class="editor-title">撰写文章</h2>
+    <input type="text" v-model="title" placeholder="输入文章标题" class="title-input" />
 
-		<div class="card" style="margin-bottom: 5px; min-height: 70vh">
-			<el-table :data="data.tableData" stripe>
-				<el-table-column
-					label="订单编号"
-					prop="order_no"
-				></el-table-column>
-				<el-table-column
-					label="商品名称"
-					prop="goods_name"
-				></el-table-column>
-				<el-table-column label="商品图片" prop="goods_img">
-					<template #default="scope">
-						<el-image
-							style="border-radius: 5%; max-width: 50px"
-							:src="scope.row.goods_img"
-							:preview-src-list="[scope.row.goods_img]"
-							:preview-teleported="true"
-						></el-image>
-					</template>
-				</el-table-column>
-				<el-table-column label="购买数量" prop="num"></el-table-column>
-				<el-table-column
-					label="下单人"
-					prop="user_name"
-				></el-table-column>
-				<el-table-column label="订单状态" prop="status">
-					<template #default="scope">
-						<el-tag
-							v-if="scope.row.status === '待支付'"
-							type="warning"
-							>待支付</el-tag
-						>
-						<el-tag
-							v-if="scope.row.status === '待发货'"
-							type="success"
-							>待发货</el-tag
-						>
-						<el-tag v-if="scope.row.status === '待收货'" type="info"
-							>待收货</el-tag
-						>
-						<el-tag
-							v-if="scope.row.status === '已收货'"
-							type="success"
-							>已收货</el-tag
-						>
-						<el-tag
-							v-if="scope.row.status === '已取消'"
-							type="danger"
-							>已取消</el-tag
-						>
-					</template>
-				</el-table-column>
-				<el-table-column label="下单时间" prop="time"></el-table-column>
-				<el-table-column label="操作" header-align="center" width="160">
-					<template #default="scope">
-						<el-button
-							v-if="scope.row.status === '待支付'"
-							type="danger"
-							@click="
-								changeStatus(scope.row, '已取消'),
-									candleOrder(
-										scope.row.goods_id,
-										scope.row.num
-									)
-							"
-							>取消</el-button
-						>
-						<el-button
-							v-if="
-								data.user.role === 'USER' &&
-								scope.row.status === '待支付'
-							"
-							type="danger"
-							@click="changeStatus(scope.row, '待发货')"
-							>支付</el-button
-						>
-						<el-button
-							v-if="
-								data.user.role === 'ADMIN' &&
-								scope.row.status === '待发货'
-							"
-							type="danger"
-							@click="changeStatus(scope.row, '待收货')"
-							>发货</el-button
-						>
-						<el-button
-							v-if="
-								data.user.role === 'USER' &&
-								scope.row.status === '待收货'
-							"
-							type="danger"
-							@click="changeStatus(scope.row, '已收货')"
-							>收货</el-button
-						>
-						<el-button
-							v-if="data.user.role === 'ADMIN'"
-							type="danger"
-							@click="handleDelete(scope.row.id)"
-							>删除</el-button
-						>
-					</template>
-				</el-table-column>
-			</el-table>
-		</div>
+    <input type="number" v-model="articleId" placeholder="输入文章 ID" class="article-id-input" />
 
-		<div class="card" v-if="data.total">
-			<el-pagination
-				background
-				layout="prev, pager, next"
-				v-model:page-size="data.pageSize"
-				v-model:current-page="data.pageNum"
-				:total="data.total"
-			/>
-		</div>
-	</div>
+    <!-- 文件上传处理 -->
+    <input type="file" @change="handleFileUpload" accept="image/*" class="file-input" />
+
+    <v-md-editor v-model="markdownContent" class="editor"  :disabled-menus="[]"
+                 @upload-image="handleUploadImage"/>
+
+    <button @click="saveArticle" class="save-button" :disabled="isLoading">
+      <span v-if="isLoading">加载中...</span>
+      <span v-else>保存文章</span>
+    </button>
+
+    <div v-if="message" class="message">{{ message }}</div>
+  </div>
 </template>
 
 <script setup>
-import request from "@/utils/request";
-import { reactive } from "vue";
-import { ElMessageBox, ElMessage } from "element-plus";
+import { ref } from 'vue';
+import axios from 'axios';
 
-// 文件上传的接口地址
-const uploadUrl = import.meta.env.VITE_BASE_URL + "/files/upload";
+const markdownContent = ref(''); // Markdown 内容
+const title = ref(''); // 文章标题
+const articleId = ref(null); // 文章 ID
+const message = ref(''); // 提示信息
+const isLoading = ref(false); // 加载状态
+const selectedFile = ref(null); // 图片文件
 
-const data = reactive({
-	user: JSON.parse(localStorage.getItem("system-user") || "{}"),
-	pageNum: 1,
-	pageSize: 10,
-	total: 0,
-	formVisible: false,
-	form: {},
-	tableData: [],
-	order_no: null,
-});
-
-console.log(data.user);
-console.log(data.user.role === "USER");
-
-// 分页查询
-const load = () => {
-	if (data.user.role === "USER") {
-		request
-			.get("/orders/selectPage", {
-				params: {
-					pageNum: data.pageNum,
-					pageSize: data.pageSize,
-					order_no: data.order_no,
-					user_id: data.user.id,
-				},
-			})
-			.then((res) => {
-				data.tableData = res.data?.list;
-				data.total = res.data?.total;
-			});
-	} else if (data.user.role === "ADMIN") {
-		request
-			.get("/orders/selectPage", {
-				params: {
-					pageNum: data.pageNum,
-					pageSize: data.pageSize,
-					order_no: data.order_no,
-				},
-			})
-			.then((res) => {
-				data.tableData = res.data?.list;
-				data.total = res.data?.total;
-			});
-	} else {
-		ElMessage.info("请先登录");
-	}
+// 文件上传处理
+const handleFileUpload = (event) => {
+  selectedFile.value = event.target.files[0]; // 获取选择的文件
 };
 
-// 状态修改
-const changeStatus = (row, status) => {
-	row.status = status;
-	console.log(row);
-	console.log(data.form);
-	request.put("/orders/update", row).then((res) => {
-		if (res.code === "200") {
-			load();
-			ElMessage.success("操作成功");
-			data.formVisible = false;
-		} else {
-			ElMessage.error(res.msg);
-		}
-	});
+// 上传图片
+const handleUploadImage = async () => {
+  if (!selectedFile.value) return '';
+
+  const formData = new FormData();
+  formData.append('file', selectedFile.value); // 添加文件到 FormData
+
+  try {
+    const response = await axios.post('http://localhost:9090/images/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+
+    return response.data.url; // 返回上传后的图片 URL
+  } catch (error) {
+    console.error('图片上传失败:', error);
+    alert('图片上传失败，请重试。');
+  }
 };
 
-// 弹窗保存
-const save = () => {
-	// data.form有id就是更新，没有就是新增
-	data.form.id ? update() : add();
+
+
+// 插入图片到 Markdown
+const insertImageIntoMarkdown = async () => {
+  const uploadUrl = await handleUploadImage();
+  if (uploadUrl === '') return false;
+  if (uploadUrl) {
+    const markdownImageSyntax = `![Image](${uploadUrl})`;
+    markdownContent.value += `\n${markdownImageSyntax}\n`;
+    return true;
+  }
+  return false;
 };
 
-// 删除
-const handleDelete = (id) => {
-	ElMessageBox.confirm("删除后数据无法恢复，您确定删除吗?", "删除确认", {
-		type: "warning",
-	})
-		.then((res) => {
-			request.delete("/orders/delete/" + id).then((res) => {
-				if (res.code === "200") {
-					load();
-					ElMessage.success("操作成功");
-				} else {
-					ElMessage.error(res.msg);
-				}
-			});
-		})
-		.catch((err) => {});
+// 保存文章
+const saveArticle = async () => {
+  if (!title.value.trim()) {
+    return (message.value = '标题不能为空！');
+  }
+  if (!articleId.value) {
+    return (message.value = '文章 ID 不能为空！');
+  }
+  if (!markdownContent.value.trim()) {
+    return (message.value = '内容不能为空！');
+  }
+
+  isLoading.value = true; // 设置加载状态
+  const imageUploadSuccessful = await insertImageIntoMarkdown(); // 上传图片并插入
+
+  if (imageUploadSuccessful) {
+    isLoading.value = false;
+    return; // 中止保存
+  }
+
+  const payload = {
+    title: title.value,
+    content: markdownContent.value,
+    article_id: articleId.value,
+  };
+
+  try {
+    await axios.post('http://localhost:9090/articles/add', payload);
+    message.value = '文章保存成功！';
+    // 清空表单
+    title.value = '';
+    markdownContent.value = '';
+    articleId.value = null;
+    selectedFile.value = null; // 清空文件
+  } catch (error) {
+    console.error('保存文章失败:', error);
+    message.value = '保存失败，请重试！';
+  } finally {
+    isLoading.value = false; // 结束加载状态
+  }
 };
 
-const candleOrder = (goods_id, num) => {
-	request
-		.get("/goods/cancelOrder", {
-			params: {
-				goods_id: goods_id,
-				num: num,
-			},
-		})
-		.then((res) => {
-			if (res.code === "200") {
-				load();
-				ElMessage.success("操作成功");
-				data.formVisible = false;
-			} else {
-				console.log(res);
-				ElMessage.error(res.msg);
-			}
-		});
-};
 
-// 重置
-const reset = () => {
-	data.order_no = null;
-	load();
-};
 
-// 处理文件上传的钩子
-const handleImgSuccess = (res) => {
-	data.form.avatar = res.data; // res.data就是文件上传返回的文件路径，获取到路径后赋值表单的属性
-};
-
-load();
 </script>
+
+<style scoped>
+.markdown-editor {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 100vh;
+}
+
+.editor-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.title-input,
+.article-id-input,
+.file-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.editor {
+  margin-bottom: 20px;
+}
+
+.save-button {
+  background-color: #409eff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #d9534f;
+}
+</style>

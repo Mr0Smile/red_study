@@ -69,10 +69,17 @@ const routes = [
 				component: () => import("@/views/manager/Article.vue"),
 				params: { show: false }, // 导航栏不显示
 			},
+			{
+				path: "text", // 使用动态参数 myData
+				name: "text",
+				component: () => import("@/views/manager/Text.vue"),
+				params: { showText: "文章", icon: "Tickets", show: true },
+			},
 		],
 	},
 	{ path: "/login", component: () => import("@/views/Login.vue") },
 	{ path: "/register", component: () => import("@/views/Register.vue") },
+
 ];
 
 const router = createRouter({

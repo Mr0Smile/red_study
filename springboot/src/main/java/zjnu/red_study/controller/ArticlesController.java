@@ -1,45 +1,74 @@
 package zjnu.red_study.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import zjnu.red_study.common.Result;
 import zjnu.red_study.entity.Articles;
-import zjnu.red_study.service.ArticleService;
+import zjnu.red_study.service.ArticlesService;
 
 import java.util.List;
 
+/**
+ * Articles 控制器
+ **/
 @RestController
-@RequestMapping("/api/articles")
+@RequestMapping("/articles")
+
 public class ArticlesController {
 
-    @Autowired
-    private ArticleService articleService;
+    private final ArticlesService articlesService;
 
-    @GetMapping
-    public List<Articles> getAllArticles() {
-        return articleService.getAllArticles();
+    public ArticlesController(ArticlesService articlesService) {
+        this.articlesService = articlesService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Articles> getArticleById(@PathVariable Integer id) {
-        Articles article = articleService.getArticleById(id);
-        return article != null ? ResponseEntity.ok(article) : ResponseEntity.notFound().build();
+    /**
+     * 新增文章
+     */
+    @PostMapping("/add")
+    public Result add(@RequestBody Articles articles) {
+        articlesService.add(articles);
+        return Result.success();
     }
 
-    @PostMapping
-    public void createArticle(@RequestBody Articles article) {
-        articleService.createArticle(article);
+    /**
+     * 删除文章
+     */
+    @DeleteMapping("/delete/{id}")
+    public Result deleteById(@PathVariable Integer id) {
+        articlesService.deleteById(id);
+        return Result.success();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> updateArticle(@PathVariable Integer id, @RequestBody Articles articleDetails) {
-        articleService.updateArticle(id, articleDetails);
-        return ResponseEntity.ok().build();
+    /**
+     * 修改文章
+     */
+    @PutMapping("/update")
+    public Result updateById(@RequestBody Articles articles) {
+        try {
+            articlesService.updateById(articles);
+            return Result.success();
+        } catch (Exception e) {
+            // 打印异常，或存入日志
+            return Result.fail("Update failed: " + e.getMessage());
+        }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteArticle(@PathVariable Integer id) {
-        articleService.deleteArticle(id);
-        return ResponseEntity.ok().build();
+    /**
+     * 获取文章
+     */
+    @GetMapping("/selectById/{id}")
+    public Result selectById(@PathVariable Integer id) {
+        Articles articles = articlesService.selectById(id);
+        return articles != null ? Result.success(articles) : Result.fail("not found");
+    }
+
+    /**
+     * 查询所有文章
+     */
+    @GetMapping("/selectAll")
+    public Result selectAll() {
+        List<Articles> list = articlesService.selectAll();
+        return Result.success(list);
     }
 }

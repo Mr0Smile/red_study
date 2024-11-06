@@ -1,45 +1,36 @@
 package zjnu.red_study.mapper;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Select;
-
-import zjnu.red_study.entity.Admin;
+import zjnu.red_study.entity.Articles;
 
 import java.util.List;
 
 /**
- * 操作admin相关数据接口
-*/
-public interface AdminMapper {
+ * 操作 articles 相关数据接口
+ */
+public interface ArticlesMapper {
 
     /**
-      * 新增
-    */
-    int insert(Admin admin);
+     * 新增文章
+     */
+    int insert(Articles articles);
 
     /**
-      * 删除
-    */
-    @Delete("delete from admin where id = #{id}")
+     * 删除文章
+     */
     int deleteById(Integer id);
 
     /**
-      * 修改
-    */
-    int updateById(Admin admin);
+     * 更新文章
+     */
+    int updateById(Articles articles);
 
     /**
-      * 根据ID查询
-    */
-    @Select("select * from admin where id = #{id}")
-    Admin selectById(Integer id);
+     * 根据ID查询文章
+     */
+    Articles selectById(Integer id);
 
     /**
-      * 查询所有
-    */
-    List<Admin> selectAll(Admin admin);
-
-    @Select("select * from admin where username = #{username}")
-    Admin selectByUsername(String username);
-
+     * 查询所有文章
+     */
+    List<Articles> selectAll();
 }

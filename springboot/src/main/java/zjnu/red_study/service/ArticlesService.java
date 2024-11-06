@@ -1,55 +1,57 @@
 package zjnu.red_study.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import zjnu.red_study.entity.Articles;
+import zjnu.red_study.mapper.ArticlesMapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Articles 业务处理
+ **/
 @Service
-public class ArticleService {
+public class ArticlesService {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    @Resource
+    private ArticlesMapper articlesMapper;
 
-    public List<Articles> getAllArticles() {
-        String sql = "SELECT * FROM articles";
-        return jdbcTemplate.query(sql, new ArticleMapper());
+    /**
+     * 新增文章
+     */
+    @Transactional
+    public void add(Articles articles) {
+        articlesMapper.insert(articles);
     }
 
-    public Articles getArticleById(Integer id) {
-        String sql = "SELECT * FROM articles WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ArticleMapper());
+    /**
+     * 删除文章
+     */
+    @Transactional
+    public void deleteById(Integer id) {
+        articlesMapper.deleteById(id);
     }
 
-    public void createArticle(Articles article) {
-        String sql = "INSERT INTO articles (title, content, article_id) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, article.getTitle(), article.getContent(), article.getArticle_id());
+    /**
+     * 更新文章
+     */
+    @Transactional
+    public void updateById(Articles articles) {
+        articlesMapper.updateById(articles);
     }
 
-    public void updateArticle(Integer id, Articles articleDetails) {
-        String sql = "UPDATE articles SET title = ?, content = ?, article_id = ? WHERE id = ?";
-        jdbcTemplate.update(sql, articleDetails.getTitle(), articleDetails.getContent(), articleDetails.getArticle_id(), id);
+    /**
+     * 根据ID查询文章
+     */
+    public Articles selectById(Integer id) {
+        return articlesMapper.selectById(id);
     }
 
-    public void deleteArticle(Integer id) {
-        String sql = "DELETE FROM articles WHERE id = ?";
-        jdbcTemplate.update(sql, id);
-    }
-
-    private static final class ArticleMapper implements RowMapper<Articles> {
-        @Override
-        public Articles mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Articles article = new Articles();
-            article.setId(rs.getInt("id"));
-            article.setTitle(rs.getString("title"));
-            article.setContent(rs.getString("content"));
-            article.setArticle_id(rs.getInt("article_id"));
-            return article;
-        }
+    /**
+     * 查询所有文章
+     */
+    public List<Articles> selectAll() {
+        return articlesMapper.selectAll();
     }
 }
