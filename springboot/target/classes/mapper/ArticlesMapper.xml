@@ -3,8 +3,8 @@
 <mapper namespace="zjnu.red_study.mapper.ArticlesMapper">
 
     <insert id="insert" parameterType="zjnu.red_study.entity.Articles" >
-        INSERT INTO articles (title, content, article_id)
-        VALUES (#{title}, #{content}, #{article_id})
+        INSERT INTO articles (title, content, author_id, submit_time)
+        VALUES (#{title}, #{content}, #{author_id}, #{submit_time})
     </insert>
 
     <delete id="deleteById">
@@ -13,7 +13,7 @@
 
     <update id="updateById" parameterType="zjnu.red_study.entity.Articles">
         UPDATE articles
-        SET title = #{title}, content = #{content}, article_id = #{article_id}
+        SET title = #{title}, content = #{content}, author_id = #{author_id}, submit_time = #{submit_time}
         WHERE id = #{id}
     </update>
 

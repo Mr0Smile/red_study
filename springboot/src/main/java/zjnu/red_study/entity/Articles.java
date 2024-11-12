@@ -3,6 +3,28 @@ package zjnu.red_study.entity;
 public class Articles {
     private Integer id;
     private String title;
+    private String content;
+    private Integer author_id;
+    private String submit_time;
+
+    public Integer getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(Integer author_id) {
+        this.author_id = author_id;
+    }
+
+
+
+    public String getSubmit_time() {
+        return submit_time;
+    }
+
+    public void setSubmit_time(String submit_time) {
+        this.submit_time = submit_time;
+    }
+
 
     public Integer getId() {
         return id;
@@ -28,16 +50,8 @@ public class Articles {
         this.content = content;
     }
 
-    public Integer getArticle_id() {
-        return article_id;
-    }
 
-    public void setArticle_id(Integer article_id) {
-        this.article_id = article_id;
-    }
 
-    private String content;
-    private Integer article_id;
 
 
 }
