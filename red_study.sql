@@ -11,7 +11,7 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 06/11/2024 16:57:44
+ Date: 12/11/2024 20:39:29
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `admin`  (
   `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '角色',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '管理员信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '管理员信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
@@ -45,15 +45,23 @@ CREATE TABLE `articles`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `article_id` int(22) NULL DEFAULT NULL,
+  `author_id` int(22) NOT NULL,
+  `submit_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of articles
 -- ----------------------------
-INSERT INTO `articles` VALUES (1, '1', '1', 1);
-INSERT INTO `articles` VALUES (2, '1', '# 胡志迪大雾', 2);
+INSERT INTO `articles` VALUES (1, '1', '1', 1, '');
+INSERT INTO `articles` VALUES (2, '1', '# 胡志迪大雾', 2, '');
+INSERT INTO `articles` VALUES (3, '2', '44瓦达2', 4, '');
+INSERT INTO `articles` VALUES (6, '蜂箱支架', '<h3>Lovancair</h3>\n<h3>Features:</h3>\n1. Lightweight and convenient for easy movement<br>\n2. Widely used in gardens, farms, and yards<br>\n3. Provides safe and secure holding during inspections<br>\n4. Easy to clean and maintain<br>\n5. Made of stainless steel for durability<br>\n6. Can hold up to 4 frames of honey and brood<br>\n7. Durable and break-proof construction<br>\n8. Beehive hanger for organizing frames and tools<br>\n9. Easy to use and hang directly on the beehive<br>\n\n<h3>Specification:</h3>\n\n<h5>Name:</h5> Beehive Inspection Bracket\n<h5>Material:</h5> Stainless steel\n<h5>Color: </h5>Yellow,Black,Blue,Green\n<h5>Package includes:</h5>\n2pcs * Beehive Inspection Bracket\n\n\n\n![13.jpg](http://localhost:9090/files/download/1731413817624-13.jpg)', 1, '2024-11-12T12:17:03.275Z');
+INSERT INTO `articles` VALUES (7, '杀杀杀', '<h3>Lovancair</h3>\n<h3>Features:</h3>\n1. Lightweight and convenient for easy movement<br>\n2. Widely used in gardens, farms, and yards<br>\n3. Provides safe and secure holding during inspections<br>\n4. Easy to clean and maintain<br>\n5. Made of stainless steel for durability<br>\n6. Can hold up to 4 frames of honey and brood<br>\n7. Durable and break-proof construction<br>\n8. Beehive hanger for organizing frames and tools<br>\n9. Easy to use and hang directly on the beehive<br>\n\n<h3>Specification:</h3>\n\n<h5>Name:</h5> Beehive Inspection Bracket\n<h5>Material:</h5> Stainless steel\n<h5>Color: </h5>Yellow,Black,Blue,Green\n<h5>Package includes:</h5>\n2pcs * Beehive Inspection Bracket\n\n\n\n![13.jpg](http://localhost:9090/files/download/1731413817624-13.jpg)', 1, '2024-11-12T12:17:45.432Z');
+INSERT INTO `articles` VALUES (8, '炮打胡志迪——我的一张大字报', '胡志迪，原名蒋志迪，男，浙江宁波奉化人，从小接受资本主义反革命教育，幼年，跟随同乡蒋介石卖国贼于1928-1933年在上海外滩嫖娼，后炒股失败，于和平饭店连同克拉拉一同被抓，然而此人阴险狡诈，利用美色诱骗狱警，遂逃脱，更名胡志迪，字愚夫。隐于浙江师范大学杏园男寝5幢509。\n![微信图片_20241112202212.jpg](http://localhost:9090/files/download/1731414154539-微信图片_20241112202212.jpg)', 1, '2024-11-12T12:26:18.372Z');
+INSERT INTO `articles` VALUES (9, '钱钱钱', '强强强强', 1, '2024-11-12T12:34:52.587Z');
+INSERT INTO `articles` VALUES (10, 'www', 'sss', 14, '2024-11-12T12:35:43.392Z');
+INSERT INTO `articles` VALUES (11, 'ssssssdwdas', '叶阳，原名蒋志迪，男，浙江宁波奉化人，从小接受资本主义反革命教育，幼年，跟随同乡蒋介石卖国贼于1928-1933年在上海外滩嫖娼，后炒股失败，于和平饭店连同克拉拉一同被抓，然而此人阴险狡诈，利用美色诱骗狱警，遂逃脱，更名胡志迪，字愚夫。隐于浙江师范大学杏园男寝5幢509。\n![微信图片_20241112202212.jpg](http://localhost:9090/files/download/1731414154539-微信图片_20241112202212.jpg)', 14, '2024-11-12T12:37:23.298Z');
 
 -- ----------------------------
 -- Table structure for category
@@ -63,7 +71,7 @@ CREATE TABLE `category`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '分类ID',
   `category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '分类名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '书籍分类' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '书籍分类' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
@@ -84,7 +92,7 @@ CREATE TABLE `content`  (
   `show_type` int(11) NULL DEFAULT NULL COMMENT '展示方式',
   `special_column_id` int(11) NULL DEFAULT NULL COMMENT '专栏ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '内容库' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '内容库' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of content
@@ -112,7 +120,7 @@ CREATE TABLE `goods`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of goods
@@ -132,7 +140,7 @@ CREATE TABLE `goods_in`  (
   `date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '进货日期',
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品进货表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '商品进货表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of goods_in
@@ -150,7 +158,7 @@ CREATE TABLE `notice`  (
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '公告内容',
   `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '发布时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统公告' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统公告' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of notice
@@ -171,7 +179,7 @@ CREATE TABLE `orders`  (
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '订单状态',
   `time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '订单信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orders
@@ -195,7 +203,7 @@ CREATE TABLE `study_base`  (
   `article_id` int(11) NULL DEFAULT NULL COMMENT '文章ID',
   `special_column_id` int(11) NULL DEFAULT NULL COMMENT '专栏ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '研学基地表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '研学基地表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of study_base
@@ -237,7 +245,7 @@ CREATE TABLE `user`  (
   `create_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '普通用户信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '普通用户信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -245,5 +253,6 @@ CREATE TABLE `user`  (
 INSERT INTO `user` VALUES (1, 'user', 'user', '普通用户', 'http://localhost:9090/files/download/avatar.png', 'USER', '不愿透露', '13362991597', '17721453389@163.com', '2024-09-05 15:44:40');
 INSERT INTO `user` VALUES (2, 'user2', 'user2', '普通用户2', NULL, 'USER', '女', '17721453389', '2469724709@qq.com', '2024-09-05 15:43:43');
 INSERT INTO `user` VALUES (13, 'user3', 'user3', 'user3', NULL, 'USER', NULL, NULL, NULL, '2024-09-18 08:12:06');
+INSERT INTO `user` VALUES (14, 'hzd_dsb', '123', 'hzd_dsb', NULL, 'USER', NULL, NULL, NULL, '2024-11-12 20:35:31');
 
 SET FOREIGN_KEY_CHECKS = 1;
