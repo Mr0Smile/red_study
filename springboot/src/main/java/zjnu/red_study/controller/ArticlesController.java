@@ -1,6 +1,5 @@
 package zjnu.red_study.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zjnu.red_study.common.Result;
 import zjnu.red_study.entity.Articles;
